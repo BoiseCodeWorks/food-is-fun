@@ -1,18 +1,9 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <div>
-      <h3>Day Creator</h3>
-      <day-creator />
-    </div>
-
+  <div class="day-details">
+    <h1>THIS IS THE DAY DETAILS KINDA</h1>
     <div>
       <h3>Food Search</h3>
       <food-search/>
-    </div>
-    <div>
-      <h3>Day List</h3>
-      <day-list/>
     </div>
   </div>
 </template>
@@ -24,7 +15,10 @@ import DayList from "@/components/DayList.vue";
 import FoodSearch from "@/components/FoodSearch.vue";
 
 export default {
-  name: "home",
+  name: "DayDetails",
+  mounted(){
+    console.log("THE ID FROM THE URL IS ", this.$route.params.id)
+  },
   components: {
     DayCreator,
     DayList,
