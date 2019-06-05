@@ -3,15 +3,14 @@
     <form @submit.prevent="handleSubmit" class="search-form">
       <input type="text" v-model="query">
       <button type="submit">YUM!!</button>
-      <div>
-        {{error}}
-      </div>
+      <div>{{error}}</div>
     </form>
     <div class="search-results">
       <div class="food-item" v-for="item in results" :key="item.food_name">
         <img :src="item.photo.thumb" height="80" alt>
         <span>{{item.food_name}}</span>
         <span>{{item.nf_calories}}</span>
+        <button @click="addFood(item)">Add to Day Log</button>
       </div>
     </div>
   </div>
@@ -40,12 +39,15 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        this.error = ""
+        this.error = "";
         let res = await api.post("", { query: this.query });
         this.results = res.data.foods;
       } catch (err) {
-        this.error = "Invalid Search"
+        this.error = "Invalid Search";
       }
+    },
+    addFood(item){
+      this.$store.dispatch('addFood', item)
     }
   }
 };
